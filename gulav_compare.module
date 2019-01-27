@@ -1,0 +1,33 @@
+<?php
+/*
+ * 
+ * 
+ */
+function gulav_compare_node_insert ($node) {
+if ($node->type == 'page') {
+$my_node = new stdClass();
+$my_node->type = 'article';
+node_object_prepare($my_node);
+$my_node->title = 'Title';
+$my_node->language = LANGUAGE_NONE;
+$my_node->body[LANGUAGE_NONE][0]['value'] = 'content';
+$my_node->body[LANGUAGE_NONE][0]['summary'] = 'anons';
+$my_node->body[LANGUAGE_NONE][0]['format'] = 'filtered_html';
+$my_node->uid = 1;     // необязательно
+$my_node->status = 1;  // необязательно
+$my_node->promote = 1; // необязательно
+node_save($my_node);
+//node_object_prepare($node1);
+//$new = node_save($node1);
+}
+dsm($node);
+drupal_set_message($node->type);
+}
+
+/**
+ * Подключаем css
+ */
+// Вызывается перед рендеренгом шаблона page.tpl.php
+function gulav_compare_preprocess_html(&$variables){
+	//drupal_add_css(drupal_get_path('module', 'gulav') . '/gulav-form.css');
+}
